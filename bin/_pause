@@ -1,0 +1,41 @@
+#!perl
+
+# DATE
+# VERSION
+
+# NO_PERINCI_CMDLINE_SCRIPT
+# FRAGMENT id=shcompgen-hint completer=1 for=pause
+
+use App::pause;
+use Perinci::CmdLine::Lite;
+
+die "This script is for shell completion only\n"
+    unless $ENV{GETOPT_LONG_DUMP} || $ENV{COMP_LINE} || $ENV{COMMAND_LINE};
+
+Perinci::CmdLine::Lite->new(
+    %App::pause::cli_attrs,
+)->run;
+
+# ABSTRACT: Improved shell completer for pause
+# PODNAME:
+
+=head1 SYNOPSIS
+
+To install, install this module and then in your bash (and/or bash startup
+file):
+
+ complete -C _pause pause
+
+or, you can use L<shcompgen> to do that for you automatically.
+
+Now L<pause> has improved bash completion:
+
+ % pause <tab>  ;# complete subcommand and options
+ % pause upload Some-Release-0.01.tar.gz --retries <tab> ;# complete argument value
+
+
+=head1 DESCRIPTION
+
+The L<pause> script from L<App::pause> already comes with basic completion: it
+can complete subcommand names and options. This completer can also complete
+argument values.
